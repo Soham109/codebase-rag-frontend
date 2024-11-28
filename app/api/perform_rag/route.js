@@ -1,5 +1,5 @@
 // app/api/perform_rag/route.js
-
+export const runtime = "nodejs";
 export async function POST(request) {
   try {
     const { query } = await request.json();
