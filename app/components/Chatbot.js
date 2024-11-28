@@ -56,8 +56,14 @@ const Chatbot = () => {
     };
 
     const scrollContainer = scrollRef.current;
-    scrollContainer.addEventListener("scroll", handleScroll);
-    return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   const handleSend = async () => {
@@ -134,7 +140,7 @@ const Chatbot = () => {
       >
         <div className="relative">
           <div
-            className={`max-w-2xl px-5 py-3 rounded-lg shadow-md transition-all duration-300 ease-in-out ${
+            className={`max-w-2xl px-5 py-3 rounded-lg shadow-md transition-colors duration-300 ${
               msg.sender === "user"
                 ? "bg-blue-500 text-white"
                 : "bg-gray-300 text-gray-900"
@@ -198,8 +204,8 @@ const Chatbot = () => {
     >
       {/* Header */}
       <header
-        className={`bg-white shadow-md ${
-          theme === "dark" ? "bg-gray-800" : "bg-white"
+        className={`shadow-md ${
+          theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-900"
         } transition-colors duration-500 rounded-b-3xl`}
       >
         <div className="max-w-5xl mx-auto px-8 py-6 flex items-center justify-between">
@@ -244,7 +250,7 @@ const Chatbot = () => {
 
       {/* Input Area */}
       <footer
-        className={`bg-white shadow-inner ${
+        className={`shadow-inner ${
           theme === "dark" ? "bg-gray-800" : "bg-white"
         } transition-colors duration-500 rounded-t-3xl`}
       >
