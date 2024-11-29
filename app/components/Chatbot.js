@@ -1,5 +1,3 @@
-// components/Chatbot.js
-
 import { useState, useEffect, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -258,6 +256,18 @@ const Chatbot = () => {
           >
             {theme === "light" ? <FaMoon /> : <FaSun />}
           </button>
+        </div>
+        {/* Added Note */}
+        <div className="max-w-5xl mx-auto px-8 pb-4">
+          <p
+            className={`text-center text-sm ${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            }`}
+          >
+            <strong>Note:</strong> The backend server's free plan, hosted on
+            Render, expires around December end. The web app will stop
+            functioning in production after that.
+          </p>
         </div>
       </header>
 

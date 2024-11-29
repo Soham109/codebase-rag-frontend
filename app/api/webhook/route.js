@@ -1,14 +1,7 @@
-// app/api/webhook/route.js
-
 import { NextResponse } from "next/server";
 
-// In-memory store for task results (suitable for development; use persistent storage in production)
 const taskResults = new Map();
 
-/**
- * Handles POST requests from the backend webhook callback.
- * Expected payload: { task_id: string, response: string } or { task_id: string, error: string }
- */
 export async function POST(request) {
   try {
     const { task_id, response, error } = await request.json();
@@ -37,10 +30,6 @@ export async function POST(request) {
   }
 }
 
-/**
- * Handles GET requests from the frontend to poll for task results.
- * Query Parameter: task_id
- */
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
