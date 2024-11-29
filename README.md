@@ -28,7 +28,6 @@ This project is a web application that utilizes Pinecone for vectorized data sto
 - **Vercel:** Hosting platform optimized for Next.js applications.
 - **Webhooks:** Implemented to manage asynchronous tasks and reduce request timeouts.
 
-`
 ## Acknowledgements
 
 - [Pinecone](https://www.pinecone.io/)
