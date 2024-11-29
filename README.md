@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Title
 
-## Getting Started
+A web application (RAG based) leveraging vectorized data storage and text embeddings for efficient data handling and retrieval.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is a web application that utilizes Pinecone for vectorized data storage and Hugging Face's embedding models for text embeddings. The backend is deployed on Render, while the frontend is built with Next.js and deployed on Vercel. To address request timeout issues (HTTP 504 errors), webhooks have been implemented for asynchronous processing.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Note:** The web application may stop working after December due to the expiration of the free tier on Render.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Vectorized Data Storage:** Efficiently store and retrieve vector data using Pinecone.
+- **Text Embeddings:** Utilize Hugging Face's models for advanced text embedding.
+- **Modern Frontend:** Built with Next.js for a seamless user experience.
+- **Scalable Backend:** Deployed on Render for robust performance.
+- **Webhook Integration:** Prevents 504 errors by handling long-running requests asynchronously.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Pinecone:** Vector database for high-performance vector operations.
+- **Hugging Face:** State-of-the-art models for text embedding.
+- **Next.js:** React framework for server-side rendering and static site generation.
+- **Render:** Cloud platform for deploying web applications.
+- **Vercel:** Hosting platform optimized for Next.js applications.
+- **Webhooks:** Implemented to manage asynchronous tasks and reduce request timeouts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`
+## Acknowledgements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Pinecone](https://www.pinecone.io/)
+- [Hugging Face](https://huggingface.co/)
+- [Next.js](https://nextjs.org/)
+- [Render](https://render.com/)
+- [Vercel](https://vercel.com/)
