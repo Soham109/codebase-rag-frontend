@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { duotoneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { FaPaperPlane, FaMoon, FaSun, FaArrowDown } from "react-icons/fa";
+import axios from "axios";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -35,14 +36,12 @@ const Chatbot = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Scroll to the latest message
   useEffect(() => {
     if (!showScrollButton) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, showScrollButton]);
 
-  // Handle scroll to show/hide scroll button
   useEffect(() => {
     const handleScroll = () => {
       if (scrollRef.current) {
@@ -80,27 +79,35 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
+      const webhookUrl = "https://codebase-rag-soham.vercel.app/api/webhook";
+
+      // Initiate the RAG task
       const response = await fetch("/api/perform_rag", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: input }),
+        body: JSON.stringify({ query: input, callback_url: webhookUrl }),
       });
 
       if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(errorData.error || `Server error: ${response.status}`);
       }
 
       const data = await response.json();
+      const { task_id } = data;
 
-      const botMessage = {
+      const pendingMessage = {
         id: messages.length + 2,
         sender: "bot",
-        text: data.response,
+        text: "Processing your request...",
         timestamp: new Date(),
+        task_id,
       };
-      setMessages((prev) => [...prev, botMessage]);
+      setMessages((prev) => [...prev, pendingMessage]);
+
+      pollTaskResult(task_id);
     } catch (error) {
       console.error("Error:", error);
       const errorMessage = {
@@ -113,6 +120,40 @@ const Chatbot = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const pollTaskResult = async (task_id) => {
+    const interval = setInterval(async () => {
+      try {
+        const response = await axios.get(`/api/webhook?task_id=${task_id}`);
+        if (response.data.status === "completed") {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.task_id === task_id
+                ? { ...msg, text: response.data.response, task_id: undefined }
+                : msg
+            )
+          );
+          clearInterval(interval);
+        } else if (response.data.status === "error") {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.task_id === task_id
+                ? {
+                    ...msg,
+                    text: `Error: ${response.data.error}`,
+                    task_id: undefined,
+                  }
+                : msg
+            )
+          );
+          clearInterval(interval);
+        }
+      } catch (error) {
+        console.error("Polling error:", error);
+        clearInterval(interval);
+      }
+    }, 5000); // Poll every 5 seconds
   };
 
   const handleKeyPress = (e) => {
