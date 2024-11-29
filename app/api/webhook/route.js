@@ -9,6 +9,7 @@ const taskResults = new Map();
  * Handles POST requests from the backend webhook callback.
  * Expected payload: { task_id: string, response: string } or { task_id: string, error: string }
  */
+export async function POST(request) {
   try {
     const { task_id, response, error } = await request.json();
 
