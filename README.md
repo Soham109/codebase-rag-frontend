@@ -1,9 +1,7 @@
-
-
-
-
 # Codebase RAG
-![Uploading App screenshot.png…]()
+<div align="center">
+  <img width="570" alt="App screenshot" src="https://github.com/user-attachments/assets/70e33345-504c-479e-93d2-6a8dc6d8ed22">
+</div>
 
 A web application (RAG based) leveraging vectorized data storage and text embeddings for efficient data handling and retrieval.
 
