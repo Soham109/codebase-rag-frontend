@@ -1,4 +1,9 @@
-# Project Title
+
+
+
+
+# Codebase RAG
+![Uploading App screenshot.png…]()
 
 A web application (RAG based) leveraging vectorized data storage and text embeddings for efficient data handling and retrieval.
 
