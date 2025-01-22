@@ -265,7 +265,7 @@ const Chatbot = () => {
             }`}
           >
             <strong>Note:</strong> The backend server's free plan, hosted on
-            Render, expires around December end. The web app will stop
+            Render, expires around December end 2024. The web app will stop
             functioning in production after that.
           </p>
         </div>
