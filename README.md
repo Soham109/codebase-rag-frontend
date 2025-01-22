@@ -9,7 +9,7 @@ A web application (RAG based) leveraging vectorized data storage and text embedd
 
 This project is a web application that utilizes Pinecone for vectorized data storage and Hugging Face's embedding models for text embeddings. The backend is deployed on Render, while the frontend is built with Next.js and deployed on Vercel. To address request timeout issues (HTTP 504 errors), webhooks have been implemented for asynchronous processing.
 
-> **Note:** The web application may stop working after December due to the expiration of the free tier on Render.
+> **Note:** The web application may stop working after December 2024 due to the expiration of the free tier on Render.
 
 ## Features
 
